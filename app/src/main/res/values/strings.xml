@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Simple Weather</string>
+    <string name="weather_description_default">Getting weather…</string>
+    <string name="current_temperature_default">Getting temperature…</string>
+    <string name="daily_low_label">Low</string>
+    <string name="daily_high_label">High</string>
+    <string name="daily_low_default">…</string>
+    <string name="daily_high_default">…</string>
+    <string name="humidity">Humidity: </string>
+    <string name="wind_speed">Wind Speed: </string>
+    <string name="temp_format_label">Temperature (°C/°F): </string>
+</resources>
