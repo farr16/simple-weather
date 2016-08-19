@@ -50,6 +50,6 @@ public class Weather {
 
     public double getHumidity() {return humidity;}
 
-    public double getWind_speed() {return wind_speed;}
+    public double getWind_Speed() {return wind_speed;}
 
 }

@@ -32,17 +32,27 @@ public class MainActivity extends AppCompatActivity {
         daily_low = (TextView) findViewById(R.id.daily_low_display);
         daily_high = (TextView) findViewById(R.id.daily_high_display);
         humidity = (TextView) findViewById(R.id.humidity_display);
-        wind_speed = (TextView) findViewById(R.id.humidity_display);
+        wind_speed = (TextView) findViewById(R.id.wind_speed_display);
         temp_toggle = (Switch) findViewById(R.id.temp_format_switch);
 
         //test code for making sure the url is created properly
         String api_call_url = base_url + city_id + suffix_url + BuildConfig.OPEN_WEATHER_MAP_API_KEY;
 
-        weather_description.setText(api_call_url);
+        new GetWeatherTask(this).execute(api_call_url);
 
     }
 
     public void setWeatherGUI(Weather w) {
+        weather_description.setText(w.getDescription());
+        current_temperature.setText("" + w.getTemp_K());
+        daily_low.setText("" + w.getLow_K());
+        daily_high.setText("" + w.getHigh_K());
+        humidity.setText("Humidity: " + w.getHumidity() + "%");
+        wind_speed.setText("Wind Speed: " + w.getWind_Speed());
+
+        System.out.println("Confirm this method is actually called");
+        System.out.println("Description from weather object: " + w.getDescription());
+
         return;
     }
 }

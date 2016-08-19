@@ -19,7 +19,7 @@ import java.net.URL;
  *
  * Task for making API calls using HTTPConnection and storing the results in a weather object.
  */
-public class GetWeatherTask extends AsyncTask<String, Void, Void> {
+public class GetWeatherTask extends AsyncTask<String, Void, Weather> {
     private MainActivity callActivity;
     private Weather weather;
 
@@ -29,7 +29,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected Weather doInBackground(String... params) {
         try {
             URL url = new URL(params[0]);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -77,14 +77,22 @@ public class GetWeatherTask extends AsyncTask<String, Void, Void> {
             System.out.println("Humidity: " + humidity + "%");
             System.out.println("Wind Speed: " + wind_speed);
 
+            weather.setDescription(description);
+            weather.setTemp_K(temp_curr_K);
+            weather.setLow_K(temp_min_K);
+            weather.setHigh_K(temp_max_K);
+            weather.setHumidity(humidity);
+            weather.setWind_speed(wind_speed);
+
+            return weather;
+
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    protected Void onPostExecute() {
-        callActivity.setWeatherGUI(weather);
-        return null;
+    protected void onPostExecute(Weather w){
+        callActivity.setWeatherGUI(w);
     }
 }
