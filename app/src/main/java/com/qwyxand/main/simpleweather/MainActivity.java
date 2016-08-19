@@ -37,14 +37,8 @@ public class MainActivity extends AppCompatActivity {
         temp_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
-                if(on)
-                {
-                    temp_C = true;
-                }
-                else
-                {
-                    temp_C = false;
-                }
+                temp_C = on;
+                if (weather != null) setTemperatures(weather);
             }
         });
 
@@ -60,29 +54,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setWeatherGUI(Weather w) {
+
         weather_description.setText(w.getDescription());
-        String curr_temp_text = "" + convertKelvin(w.getTemp_K(), temp_C);
-        current_temperature.setText(curr_temp_text);
-        String low_text = "" + convertKelvin(w.getLow_K(), temp_C);
-        daily_low.setText(low_text);
-        String high_text = "" + convertKelvin(w.getHigh_K(), temp_C);
-        daily_high.setText(high_text);
+
+        setTemperatures(w);
+
         String humidity_text = "Humidity: " + w.getHumidity() + "%";
         humidity.setText(humidity_text);
+
         String wind_speed_text = "Wind Speed: " + w.getWind_Speed();
         wind_speed.setText(wind_speed_text);
 
         weather = w;
     }
 
+    private void setTemperatures(Weather w) {
+        String curr_temp_text = "" + convertKelvin(w.getTemp_K(), temp_C);
+        current_temperature.setText(curr_temp_text);
+        String low_text = "" + convertKelvin(w.getLow_K(), temp_C);
+        daily_low.setText(low_text);
+        String high_text = "" + convertKelvin(w.getHigh_K(), temp_C);
+        daily_high.setText(high_text);
+    }
+
     private String convertKelvin(double temp, boolean b) {
         if(b) {
             //return "" + (temp - 273.15);
-            return String.format("%.2g%n", (temp - 273.15));
+            return String.format("%.4g%n", (temp - 273.15));
         }
         else {
             //return "" + (temp * 9/5 - 459.67);
-            return String.format("%.2g%n", (temp * 9/5 - 459.67));
+            return String.format("%.3g%n", (temp * 9/5 - 459.67));
         }
     }
 }
