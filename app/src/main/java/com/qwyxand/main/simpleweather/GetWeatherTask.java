@@ -43,18 +43,6 @@ public class GetWeatherTask extends AsyncTask<String, Void, Weather> {
                 builder.append(inputString);
             }
 
-            /*JSONArray weather_array = w_json.getJSONArray("weather");
-            JSONObject weather = weather_array.getJSONObject(0);
-            String sky_status = weather.getString("description");
-            JSONObject temp_press = w_json.getJSONObject("main");
-            double temp_curr_K = temp_press.getDouble("temp");
-            double humidity = temp_press.getDouble("humidity");
-            double temp_min_K = temp_press.getDouble("temp_min");
-            double temp_max_K = temp_press.getDouble("temp_max");
-            double curr_temp_F = temp_curr_K * 9.0/5.0 - 459.67;
-            double temp_min_F = temp_min_K * 9.0/5.0 - 459.67;
-            double temp_max_F = temp_max_K * 9.0/5.0 - 459.67;*/
-
             System.out.println(builder.toString());
 
             JSONObject forecast_json = new JSONObject(builder.toString());
