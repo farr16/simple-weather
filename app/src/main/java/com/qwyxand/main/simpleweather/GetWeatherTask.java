@@ -23,6 +23,10 @@ public class GetWeatherTask extends AsyncTask<String, Void, Weather> {
     private MainActivity callActivity;
     private Weather weather;
 
+    /* Constructor for GetWeather Task
+     * Gets a reference to the MainActivity so the GUI can be updated in onPostExecute
+     * Initializes a weather object to be passed back to the MainActivity
+     */
     public GetWeatherTask(MainActivity activity) {
         callActivity = activity;
         weather = new Weather();
@@ -43,8 +47,6 @@ public class GetWeatherTask extends AsyncTask<String, Void, Weather> {
                 builder.append(inputString);
             }
 
-            System.out.println(builder.toString());
-
             JSONObject forecast_json = new JSONObject(builder.toString());
             JSONArray weather_array = forecast_json.getJSONArray("weather");
             String description = weather_array.getJSONObject(0).getString("description");
@@ -57,13 +59,6 @@ public class GetWeatherTask extends AsyncTask<String, Void, Weather> {
 
             JSONObject wind = forecast_json.getJSONObject("wind");
             double wind_speed = wind.getDouble("speed");
-
-            System.out.println("Description: " + description);
-            System.out.println("Current temperature(K): " + temp_curr_K);
-            System.out.println("Temperature min(K): " + temp_min_K);
-            System.out.println("Temperature max(K): " + temp_max_K);
-            System.out.println("Humidity: " + humidity + "%");
-            System.out.println("Wind Speed: " + wind_speed);
 
             weather.setDescription(description);
             weather.setTemp_K(temp_curr_K);
@@ -80,7 +75,12 @@ public class GetWeatherTask extends AsyncTask<String, Void, Weather> {
         return null;
     }
 
+    /* Takes the weather object returned after doInBackground and passes it back to the MainActivity
+     * so the GUI can be updated with the weather data.
+     */
     protected void onPostExecute(Weather w){
-        callActivity.setWeatherGUI(w);
+        if (w != null) {
+            callActivity.setWeatherGUI(w);
+        }
     }
 }
