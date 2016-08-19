@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView daily_high;
     private TextView humidity;
     private TextView wind_speed;
-    private Switch temp_toggle;
 
     private boolean temp_C = false;
     private Weather weather;
@@ -30,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         daily_high = (TextView) findViewById(R.id.daily_high_display);
         humidity = (TextView) findViewById(R.id.humidity_display);
         wind_speed = (TextView) findViewById(R.id.wind_speed_display);
-        temp_toggle = (Switch) findViewById(R.id.temp_format_switch);
+
+        Switch temp_toggle = (Switch) findViewById(R.id.temp_format_switch);
 
         weather = null;
 
